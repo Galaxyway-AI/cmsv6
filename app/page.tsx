@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return <main>
-    <section className="hero"><div className="hero-grid-bg"/><div className="container hero-layout"><div className="hero-copy"><span className="eyebrow light-blue">UK-hosted hybrid monitoring platform</span><h1>Live CCTV. Real-time GPS. <em>Complete remote visibility.</em></h1><p className="hero-lead">Connect compatible iCustodian® DVRs and cameras to one powerful platform for vehicles, properties, farms, boats and multi-site operations.</p><div className="hero-actions"><a className="button primary large" href="/contact?enquiry=free-trial">Start your two months free</a><a className="button outline-light large" href="/how-it-works">See how CMSV6 works</a></div><div className="hero-trust"><span><b>UK</b> hosted service</span><span><b>1→∞</b> single device to fleets</span><span><b>24/7</b> access when connected</span></div></div><DashboardVisual/></div>
+    <section className="hero"><div className="hero-grid-bg"/><div className="container hero-layout"><div className="hero-copy"><span className="eyebrow light-blue">Live CCTV, audio & GPS monitoring</span><h1>Live CCTV capture. Remote access. <em>Complete visibility.</em></h1><p className="hero-lead">View compatible cameras live across homes, businesses and vehicles, with remote playback, audio and GPS available where supported.</p><div className="hero-actions"><a className="button primary large" href="/contact?enquiry=free-trial">Start your two months free</a><a className="button outline-light large" href="/how-it-works">See how CMSV6 works</a></div><div className="hero-trust"><span><b>LIVE</b> multi-camera viewing</span><span><b>REC</b> local DVR recording</span><span><b>GPS</b> where fitted</span></div></div><DashboardVisual/></div>
       <div className="container hero-foot"><span>One platform for</span><b>Moving vehicles</b><b>Fixed premises</b><b>Temporary locations</b><b>Remote sites</b></div>
     </section>
 
@@ -34,5 +34,15 @@ export default function Home() {
 }
 
 function DashboardVisual() {
-  return <div className="dashboard-wrap" aria-label="Illustrative CMSV6 monitoring dashboard"><span className="illustrative">Illustrative monitoring view</span><div className="dash-top"><span className="dash-brand">CMSV6 <i>LIVE</i></span><span>All systems <b className="online-dot"/> 8 online</span></div><div className="dash-body"><div className="dash-map"><div className="map-road r1"/><div className="map-road r2"/><div className="map-road r3"/><div className="route-line"/><span className="pin p1">●</span><span className="pin p2">●</span><span className="pin p3">●</span><div className="map-label"><b>Vehicle 07</b><span>Live · 32 mph</span></div></div><div className="camera-grid"><div className="cam cam-road"><span>CAM 1 · ROAD</span><i/></div><div className="cam cam-site"><span>CAM 2 · SITE</span><i/></div><div className="cam cam-barn"><span>CAM 3 · BARN</span><i/></div><div className="cam cam-boat"><span>CAM 4 · MARINE</span><i/></div></div></div><div className="dash-stats"><span><small>DEVICE</small><b>Online</b></span><span><small>GPS</small><b>Connected</b></span><span><small>CAMERAS</small><b>4 active</b></span><span><small>LAST REPORT</small><b>Now</b></span></div></div>;
+  return <div className="dashboard-wrap cctv-console" aria-label="Animated illustrative CCTV live monitoring for a home, business and vehicle">
+    <span className="illustrative">Illustrative live monitoring view</span>
+    <div className="dash-top"><span className="dash-brand">CMSV6 <i>LIVE</i></span><span><b className="online-dot"/> Live capture active</span></div>
+    <div className="cctv-wall">
+      <div className="live-feed feed-business feed-primary"><div className="camera-chrome"><span>BUSINESS · WAREHOUSE 01</span><b><i/> LIVE</b></div><div className="scan-line"/><div className="capture-caption"><small>REMOTE VIEW</small><strong>Business premises</strong><span>Multi-camera coverage</span></div></div>
+      <div className="live-feed feed-home"><div className="camera-chrome"><span>HOME · EXTERIOR 02</span><b><i/> LIVE</b></div><div className="scan-line"/><div className="capture-caption"><strong>Home</strong><span>Remote property view</span></div></div>
+      <div className="live-feed feed-vehicle"><div className="camera-chrome"><span>VEHICLE · ROAD 03</span><b><i/> LIVE</b></div><div className="scan-line"/><div className="capture-caption"><strong>Vehicle</strong><span>Live video + GPS</span></div></div>
+      <div className="capture-event"><span className="event-wave"><i/><i/><i/></span><div><small>CONNECTED MONITORING</small><b>Three environments. One live view.</b></div><span className="event-time">NOW</span></div>
+    </div>
+    <div className="dash-stats cctv-stats"><span><small>LIVE VIDEO</small><b>3 views active</b></span><span><small>RECORDING</small><b>Local DVR</b></span><span><small>REMOTE ACCESS</small><b>Connected</b></span><span><small>GPS</small><b>Where fitted</b></span></div>
+  </div>;
 }

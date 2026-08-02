@@ -14,6 +14,10 @@ test("server-renders the CMSV6 acquisition homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /Live CCTV\. Real-time GPS\./);
+  assert.match(html, /Live CCTV capture\. Remote access\./);
+  assert.match(html, /Business premises/);
+  assert.match(html, /Remote property view/);
+  assert.match(html, /Live video \+ GPS/);
   assert.match(html, /two months of CMSV6 hosting free/i);
   assert.match(html, /Vehicles &amp; fleets/);
   assert.match(html, /Farms &amp; rural/);
