@@ -26,12 +26,14 @@ export function PriceEstimator() {
 }
 
 export function EnquiryForm({ compact = false }: { compact?: boolean }) {
-  const [state, setState] = useState<"idle"|"sending"|"manual"|"error">("idle");
+  const [state, setState] = useState<"idle"|"sending"|"sent"|"error">("idle");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setState("sending");
     const form = event.currentTarget;
-    const response = await fetch("/api/enquiry", { method: "POST", body: new FormData(form) });
-    if (response.ok) { setState("manual"); form.reset(); } else setState("error");
+    try {
+      const response = await fetch("/api/enquiry", { method: "POST", body: new FormData(form) });
+      if (response.ok) { setState("sent"); form.reset(); } else setState("error");
+    } catch { setState("error"); }
   }
   return <form className="enquiry-form" onSubmit={submit} aria-label="CMSV6 enquiry form">
     <div className="form-grid">
@@ -44,8 +46,8 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
     <div className="honeypot" aria-hidden="true"><label htmlFor="website">Website</label><input id="website" name="website" tabIndex={-1} autoComplete="off" /></div>
     <div><label htmlFor="message">Tell us about your setup</label><textarea id="message" name="message" rows={compact ? 3 : 5} required placeholder="Where will it be used, what equipment do you have, and what do you need to monitor?" /></div>
     <label className="check"><input type="checkbox" name="consent" required /> <span>I agree that iCustodian may use these details to respond to my enquiry.</span></label>
-    <button className="button primary" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send enquiry"}</button>
-    <div className="form-status" aria-live="polite">{state === "manual" ? "Your details passed validation. Online delivery is awaiting setup, so please email support@cmsv6.co.uk to send your enquiry today." : state === "error" ? "We could not process that yet. Please email support@cmsv6.co.uk." : ""}</div>
+    <button className="button primary" type="submit" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send enquiry"}</button>
+    <div className="form-status" aria-live="polite">{state === "sent" ? "Thank you — your enquiry has been sent to the CMSV6 support team." : state === "error" ? "We could not send that yet. Please try again or email support@cmsv6.co.uk." : ""}</div>
   </form>;
 }
 

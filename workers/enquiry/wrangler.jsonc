@@ -1,0 +1,25 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "cmsv6-enquiry-mailer",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-02",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "routes": [{ "pattern": "forms.cmsv6.co.uk", "custom_domain": true }],
+  "send_email": [{
+    "name": "EMAIL",
+    "destination_address": "frankywright@hotmail.com",
+    "allowed_sender_addresses": ["website@cmsv6.co.uk"],
+    "remote": true
+  }],
+  "ratelimits": [{
+    "name": "RATE_LIMITER",
+    "namespace_id": "98006",
+    "simple": { "limit": 5, "period": 60 }
+  }],
+  "observability": {
+    "enabled": true,
+    "logs": { "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.05 }
+  }
+}

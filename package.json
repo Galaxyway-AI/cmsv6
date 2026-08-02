@@ -10,8 +10,11 @@
     "build": "vinext build",
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "drizzle-kit generate"
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern workers/enquiry/worker-configuration.d.ts",
+    "db:generate": "drizzle-kit generate",
+    "worker:types": "wrangler types workers/enquiry/worker-configuration.d.ts --config workers/enquiry/wrangler.jsonc",
+    "worker:check": "tsc --noEmit -p workers/enquiry/tsconfig.json",
+    "worker:deploy": "wrangler deploy --config workers/enquiry/wrangler.jsonc"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",
