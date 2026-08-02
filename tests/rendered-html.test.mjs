@@ -37,3 +37,16 @@ test("publishes SEO and safety essentials", async () => {
   assert.match(html, /CMSV6 is not an emergency-response service/i);
   assert.match(html, /og\.png/);
 });
+
+test("publishes the featured compatible equipment catalogue", async () => {
+  const response = await render("/equipment");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /iCustodian® iC9800MDVR-AI/);
+  assert.match(html, /£249\.00/);
+  assert.match(html, /iC9000MDVR-AI\.png/);
+  assert.match(html, /iC9800MDVR-K\.png/);
+  assert.match(html, /N9\.png/);
+  assert.match(html, /Browse all compatible DVRs/);
+  assert.match(html, /icustodian\.com\/product\/n9dashcam/);
+});

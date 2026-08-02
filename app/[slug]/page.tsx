@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
+/* eslint-disable @next/next/no-html-link-for-pages, @next/next/no-img-element */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CTA, Disclaimer, PricingCards, SectionHeading } from "../components";
@@ -63,7 +63,58 @@ const solutionBullets = [
 
 function ResponsibleSector(){ return <section className="section responsible"><div className="container"><SectionHeading eyebrow="Sensitive settings" title="Monitoring must be authorised, proportionate and appropriate." text="Schools, care settings, workplaces and public-service operations need particularly careful governance." light/><div className="responsible-grid"><article><h3>Education & care</h3><p>Use only for authorised safeguarding, transport, access or property-security purposes. Never monitor toilets, changing areas, private treatment spaces or other inappropriate locations.</p></article><article><h3>Workplace & transport</h3><p>Be transparent about driver, employee, passenger, audio and location monitoring. Respect private use and restrict access to people with a legitimate need.</p></article><article><h3>Public-facing systems</h3><p>Use appropriate signage and privacy information. Keep recordings secure, set suitable retention rules and provide a way for people to exercise applicable rights.</p></article></div></div></section> }
 
-function EquipmentPage(){ const products=[{name:"iC9800MDVR8 Hybrid",spec:"8-channel · 4G · Wi-Fi · GPS",use:"Vehicles, homes, offices and larger camera layouts",url:"https://www.icustodian.com/product/ic9800mdvr8/"},{name:"iC-S6DASHCAM Hybrid",spec:"4-channel · 4G · Wi-Fi · GPS",use:"Cars, taxis, buses, lorries and compact installations",url:"https://www.icustodian.com/product/ic-s6dashcam/"},{name:"iC-N9DASHCAM Hybrid",spec:"4-channel · 4G · Wi-Fi · GPS · AI options",use:"Connected vehicle monitoring with compatible safety options",url:"https://www.icustodian.com/product/n9dashcam/"}]; return <><section className="section"><div className="container"><SectionHeading eyebrow="Verified equipment routes" title="Start with a CMSV6-compatible recorder." text="Product prices and stock remain on iCustodian so the information you see is current."/><div className="product-grid">{products.map((p,i)=><article key={p.name}><div className={`product-visual product-${i+1}`}><span>iCustodian®</span><b>{i===0?"8CH":"4CH"}</b><i/></div><span className="product-type">CMSV6 compatible</span><h2>{p.name}</h2><b>{p.spec}</b><p>{p.use}</p><a className="button dark" href={`${p.url}?utm_source=cmsv6.co.uk&utm_medium=referral&utm_campaign=compatible_equipment`} rel="noreferrer">View on iCustodian</a></article>)}</div><Disclaimer/></div></section><section className="section pale"><div className="container contact-grid"><div><SectionHeading eyebrow="Already own a DVR?" title="Let us check compatibility." text="Send the manufacturer, model, device ID where available, connection type, camera count and the remote functions you need. We will check before confirming compatibility."/><ul className="tick-list dark-ticks"><li>No assumptions about third-party devices</li><li>No promise until the model is checked</li><li>Advice for mobile and fixed installations</li></ul></div><EnquiryForm compact/></div></section></> }
+function EquipmentPage(){
+  const products=[
+    {
+      name:"iCustodian® iC9800MDVR-AI",
+      subtitle:"Hybrid GPS, 4G and Wi-Fi AI Mobile DVR",
+      spec:"4/8-channel · 4G · Wi-Fi · GPS · AI",
+      price:"£249.00",
+      image:"/iC9000MDVR-AI.png",
+      alt:"Front view of the iCustodian iC9800MDVR-AI mobile DVR",
+      summary:"An intelligent mobile CCTV recorder built for live monitoring as well as recording, with support for driver assistance, driver monitoring and blind-spot detection on compatible installations.",
+      features:["ADAS and driver monitoring","Blind-spot detection support","Cars, lorries and marine use","Homes and business premises"],
+      url:"https://www.icustodian.com/product/icustodian-ic9800mdvr-ai-hybrid-gps-4g-wifi-mobile-dvr/"
+    },
+    {
+      name:"iCustodian® iC9800MDVR-K",
+      subtitle:"Hybrid 4G, Wi-Fi and GPS HD Mobile DVR",
+      spec:"4/8-channel · 4G · Wi-Fi · GPS · HD",
+      image:"/iC9800MDVR-K.png",
+      alt:"Front view of the iCustodian iC9800MDVR-K key-lock mobile DVR",
+      summary:"A robust hybrid recorder with password protection, video encryption and a key-lockable 2.5-inch SATA hard-drive housing for professional fixed or mobile surveillance.",
+      features:["Key-lock storage protection","Password and video encryption","Up to eight camera channels","Vehicles, boats and fixed sites"],
+      url:"https://www.icustodian.com/product/ic9800mdvr8-k/"
+    },
+    {
+      name:"iCustodian® iC-N9DASHCAM",
+      subtitle:"Compact 4-channel Hybrid MDVR Dash Camera",
+      spec:"4-channel · 4G LTE · Wi-Fi · GPS · ADAS · DMS",
+      image:"/N9.png",
+      alt:"Angled view of the iCustodian iC-N9DASHCAM hybrid mobile DVR",
+      summary:"A professional four-channel MDVR in a compact dashcam body, combining dual built-in 1080p cameras with support for two additional 1080p CCTV cameras and remote live streaming.",
+      features:["Dual built-in 1080p cameras","Two additional camera inputs","Dual SD storage and encryption","ADAS and driver monitoring"],
+      url:"https://www.icustodian.com/product/n9dashcam"
+    }
+  ];
+
+  return <>
+    <section className="section equipment-catalogue"><div className="container">
+      <SectionHeading eyebrow="Featured compatible equipment" title="Professional recorders ready for CMSV6 streaming." text="Compare three versatile iCustodian systems for vehicles, homes, businesses and specialist installations. Follow any product link for the full specification, availability and current purchase information."/>
+      <div className="product-grid equipment-grid">{products.map((product)=><article className="equipment-product" key={product.name}>
+        <div className="product-visual equipment-product-image"><img src={product.image} alt={product.alt} loading="lazy" decoding="async"/><span>CMSV6 ready</span></div>
+        <div className="equipment-product-body"><span className="product-type">CMSV6 compatible</span><h2>{product.name}</h2><h3>{product.subtitle}</h3><b className="equipment-spec">{product.spec}</b>
+          {product.price?<div className="equipment-price"><small>Product price</small><strong>{product.price}</strong></div>:<div className="equipment-price price-link"><small>Price &amp; availability</small><strong>See iCustodian</strong></div>}
+          <p>{product.summary}</p><ul>{product.features.map(feature=><li key={feature}>{feature}</li>)}</ul>
+          <a className="button dark" href={`${product.url}?utm_source=cmsv6.co.uk&utm_medium=referral&utm_campaign=compatible_equipment`} target="_blank" rel="noreferrer">View product on iCustodian <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>)}</div>
+      <div className="equipment-shop"><div><span className="eyebrow light-blue">More compatible choices</span><h2>Explore the wider iCustodian DVR range.</h2><p>Find a wide variety of DVRs and mobile recorders that can be configured for the CMSV6 streaming app, from compact vehicle systems to multi-camera installations.</p></div><a className="button light large" href="https://www.icustodian.com/product-category/dvr/?utm_source=cmsv6.co.uk&utm_medium=referral&utm_campaign=compatible_equipment_range" target="_blank" rel="noreferrer">Browse all compatible DVRs <span aria-hidden="true">↗</span></a></div>
+      <Disclaimer/>
+    </div></section>
+    <section className="section pale"><div className="container contact-grid"><div><SectionHeading eyebrow="Already own a DVR?" title="Let us check compatibility." text="Send the manufacturer, model, device ID where available, connection type, camera count and the remote functions you need. We will check before confirming compatibility."/><ul className="tick-list dark-ticks"><li>No assumptions about third-party devices</li><li>No promise until the model is checked</li><li>Advice for mobile and fixed installations</li></ul></div><EnquiryForm compact/></div></section>
+  </>
+}
 
 function PricingPage(){ return <><section className="section" id="free-offer"><div className="container promo-panel"><span className="promo-big">2</span><div><span className="eyebrow red">Included with a compatible iCustodian DVR</span><h2>Two months of CMSV6 hosting free.</h2><p>Use the introductory period to connect cameras, configure mobile data or Wi-Fi, test live viewing and GPS, and get familiar with playback. A paid hosting plan is required to continue after the free period.</p></div><a className="button primary" href="https://www.icustodian.com/product-category/dvr/?utm_source=cmsv6.co.uk&utm_medium=referral&utm_campaign=two_months_free" rel="noreferrer">View compatible DVRs</a></div></section><section className="section pale" id="plans"><div className="container"><SectionHeading eyebrow="Published hosting plans" title="Choose a term for each compatible device." text="Simple standard pricing, with tailored quotations for larger and longer requirements."/><PricingCards/><div className="pricing-explainer"><div><h3>What the price covers</h3><p>CMSV6 server hosting for one compatible device, remote platform access and setup guidance for the selected term.</p></div><div><h3>What is separate</h3><p>DVRs, cameras, installation, mobile data, local storage, optional licences and server-side video storage unless expressly included.</p></div><div><h3>Need more?</h3><p>Ask for a quotation for fleets, multiple locations, longer terms and specialist configuration. No unapproved discount is assumed.</p></div></div></div></section><section className="section"><div className="container two-column estimator-wrap"><div><SectionHeading eyebrow="Quick estimator" title="Estimate standard hosting." text="Change the device count and term to see the published-price total."/><PriceEstimator/></div><div className="quote-card"><span className="eyebrow light-blue">Fleet & multi-site</span><h2>Need a tailored quotation?</h2><p>Tell us how many compatible devices, cameras and locations you need to manage, and the hosting term you have in mind.</p><a className="button light" href="/contact?enquiry=fleet">Request a quotation</a></div></div></section></> }
 
