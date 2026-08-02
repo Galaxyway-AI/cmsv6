@@ -73,7 +73,7 @@ export const pageMeta: Record<string, { title: string; description: string }> = 
   contact: { title: "Contact CMSV6 | Subscription, Support & Fleet Quotes", description: "Contact iCustodian about CMSV6 hosting, device activation, compatibility, support or multi-device quotes." },
   faq: { title: "CMSV6 Frequently Asked Questions", description: "Straight answers about CMSV6 compatibility, live video, GPS, mobile data, storage, access and hosting." },
   resources: { title: "CMSV6 Guides & Resources", description: "Practical guides to remote CCTV, GPS monitoring, compatible DVRs and responsible system use." },
-  privacy: { title: "Privacy Information | CMSV6", description: "Privacy information for the CMSV6 website." },
-  terms: { title: "Website & Service Terms | CMSV6", description: "Important CMSV6 website and service terms information." },
+  privacy: { title: "CMSV6 Privacy Policy | iCustodian", description: "How iCustodian Limited collects, uses, shares and protects personal information in connection with CMSV6." },
+  terms: { title: "Terms of Use and CMSV6 Service Terms", description: "Terms governing the CMSV6 website, customer accounts, subscriptions, monitoring functions and related services." },
   "responsible-use": { title: "Responsible CCTV Use | CMSV6", description: "Guidance for lawful, fair and proportionate use of video, audio and GPS monitoring." },
 };

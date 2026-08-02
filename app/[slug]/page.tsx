@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-html-link-for-pages, @next/next/no-img-element */
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { CTA, Disclaimer, PricingCards, SectionHeading } from "../components";
 import { EnquiryForm, PriceEstimator } from "../interactive";
+import { legalDocuments } from "../legal-content";
 import { faqs, features, industries, pageMeta, resources, steps } from "../site-data";
 
 export function generateStaticParams() { return Object.keys(pageMeta).map(slug => ({ slug })); }
@@ -23,8 +25,8 @@ const heroCopy: Record<string,[string,string,string]> = {
   contact:["Contact & quotations","Tell us what you need to see.","Ask about subscriptions, activation, compatibility, renewals, support or a tailored multi-device system."],
   faq:["Frequently asked questions","Straight answers before you connect.","Understand compatibility, connectivity, storage, pricing and responsible use without the jargon."],
   resources:["CMSV6 resources","Practical guides for better remote visibility.","Learn how CMSV6, compatible DVRs, connectivity and responsible monitoring fit together."],
-  privacy:["Legal information","Privacy information.","How personal information submitted through this website should be handled."],
-  terms:["Legal information","Website and service terms.","Important terms for using this website and enquiring about CMSV6 services."],
+  privacy:["Legal information","CMSV6 Privacy Policy","How iCustodian Limited collects, uses, shares and protects personal information in connection with CMSV6."],
+  terms:["Legal information","Terms of Use and CMSV6 Service Terms","The terms governing the CMSV6 website, accounts, subscriptions, monitoring functions and related services."],
   "responsible-use":["Responsible monitoring","Use CCTV, audio and GPS fairly.","Practical principles for lawful, transparent, necessary, proportionate and secure monitoring."],
 };
 
@@ -127,6 +129,53 @@ function FaqPage(){ const schema={"@context":"https://schema.org","@type":"FAQPa
 
 function ResourcesPage(){ return <section className="section"><div className="container"><SectionHeading eyebrow="Learning centre" title="Make a more informed monitoring decision." text="Initial practical guides for individuals, installers and organisations."/><div className="resource-grid">{resources.map((r,i)=><article key={r}><span>{["Explainer","Use case","Buyer guide","Rural guide","Video guide","Responsible use"][i]}</span><h2>{r}</h2><p>{["A plain-English introduction to the CMSV6 platform and compatible equipment.","How one connected platform can support moving and fixed locations.","The practical questions to ask before selecting DVR hardware.","Remote checks for livestock, buildings, entrances and equipment.","Understand what is live, local and remotely retrievable.","Transparency, proportionality, retention and authorised access."][i]}</p><a href="/contact">Ask a related question →</a></article>)}</div></div></section> }
 
-function LegalPage({type}:{type:"privacy"|"terms"}){ return <section className="section"><article className="container legal-content"><div className="legal-warning"><strong>Review required before publication</strong><p>This page is a structured placeholder, not legal advice. It must be completed and approved by an appropriately qualified UK legal or data-protection professional.</p></div>{type==="privacy"?<><h2>Privacy information framework</h2><p>iCustodian Limited should explain what personal information the CMSV6 website collects, why it is needed, the lawful basis for each use, how long it is retained, who receives it and how people can exercise applicable rights.</p><h3>Information submitted by visitors</h3><p>Contact and compatibility forms may collect names, business details, contact information, device details and enquiry content. Only information necessary to answer or manage the enquiry should be requested.</p><h3>Website information</h3><p>Essential technical records may be processed to operate, protect and troubleshoot the website. Optional analytics or advertising technologies should only be enabled in line with the published cookie choice and applicable law.</p><h3>Contact</h3><p>Privacy enquiries may be directed to <a href="mailto:support@cmsv6.co.uk">support@cmsv6.co.uk</a>. Final controller details, retention periods, processors, transfers, rights and complaint routes must be legally verified before publication.</p></>:<><h2>Terms framework</h2><p>These terms should distinguish clearly between website information, CMSV6 server hosting, compatible hardware, installation, mobile-data services, local recording and any separately purchased storage or support.</p><h3>Service availability</h3><p>Live viewing and GPS reporting require compatible equipment and suitable connectivity. Features, quality and availability depend on hardware, firmware, sensors, permissions, signal and configuration.</p><h3>Acceptable use</h3><p>Customers must use video, audio and location monitoring lawfully, fairly, transparently, securely and only for appropriate purposes. CMSV6 is not an emergency-response service and does not guarantee the prevention or detection of crime, loss or damage.</p><h3>Commercial terms</h3><p>Final subscription, renewal, cancellation, payment, support, service-level, liability and data-processing terms must be confirmed and legally approved before taking orders.</p></>}</article></section> }
+function renderLegalInline(text:string):ReactNode[] {
+  const tokens = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g).filter(Boolean);
+  return tokens.map((token,index)=>{
+    if(token.startsWith("**")&&token.endsWith("**")) return <strong key={index}>{token.slice(2,-2)}</strong>;
+    const link=token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if(link) return <a key={index} href={link[2]}>{link[1]}</a>;
+    return token;
+  });
+}
+
+function LegalDocument({markdown}:{markdown:string}){
+  const lines=markdown.replace(/\r/g,"").split("\n");
+  const blocks:ReactNode[]=[];
+  let index=0;
+
+  while(index<lines.length){
+    const line=lines[index].trim();
+    if(!line||line.startsWith("# ")){ index++; continue; }
+    if(line==="---"){ blocks.push(<hr key={`hr-${index}`}/>); index++; continue; }
+    if(line.startsWith("## ")){ blocks.push(<h2 key={`h2-${index}`}>{renderLegalInline(line.slice(3))}</h2>); index++; continue; }
+    if(line.startsWith("### ")){ blocks.push(<h3 key={`h3-${index}`}>{renderLegalInline(line.slice(4))}</h3>); index++; continue; }
+    if(line.startsWith("* ")){
+      const items:ReactNode[]=[];
+      const start=index;
+      while(index<lines.length&&lines[index].trim().startsWith("* ")){
+        items.push(<li key={index}>{renderLegalInline(lines[index].trim().slice(2))}</li>);
+        index++;
+      }
+      blocks.push(<ul key={`ul-${start}`}>{items}</ul>);
+      continue;
+    }
+
+    const paragraph:string[]=[];
+    const start=index;
+    while(index<lines.length){
+      const current=lines[index].trim();
+      if(!current||current.startsWith("#")||current==="---"||current.startsWith("* ")) break;
+      paragraph.push(current);
+      index++;
+    }
+    const content=paragraph.join(" ");
+    blocks.push(<p className={content.startsWith("**Last updated:")?"legal-updated":undefined} key={`p-${start}`}>{renderLegalInline(content)}</p>);
+  }
+
+  return <>{blocks}</>;
+}
+
+function LegalPage({type}:{type:"privacy"|"terms"}){ return <section className="section legal-section"><article className="container legal-content"><LegalDocument markdown={legalDocuments[type]}/></article></section> }
 
 function ResponsibleUse(){ return <section className="section"><div className="container responsible-page"><div className="legal-warning"><strong>Professional review required</strong><p>This practical overview does not guarantee compliance and is not a substitute for legal, safeguarding or data-protection advice.</p></div><SectionHeading eyebrow="Core principles" title="Monitor only what is justified." text="Customers are responsible for the lawful placement, configuration and use of every camera, microphone, sensor and tracking device."/><div className="principle-grid">{[["Lawful","Identify a valid purpose and lawful basis before monitoring."],["Fair & transparent","Tell affected people what is monitored, why and by whom."],["Necessary","Use monitoring only where the aim cannot reasonably be met in a less intrusive way."],["Proportionate","Limit cameras, audio, tracking, users and retention to what the purpose requires."],["Secure","Protect accounts, devices, recordings and downloads from unauthorised access."],["Accountable","Document decisions, reviews, access and deletion arrangements."]].map(([t,d])=><article key={t}><h3>{t}</h3><p>{d}</p></article>)}</div><h2>Areas needing extra care</h2><div className="warning-list"><p><b>Employee and driver monitoring:</b> be clear about monitoring during work and private use, and avoid excessive or continuous observation without strong justification.</p><p><b>Audio:</b> sound monitoring is often more intrusive than video. Do not enable it by default; assess necessity, permissions and notice.</p><p><b>Children and vulnerable people:</b> schools, nurseries, hospitals and care services must apply safeguarding, privacy and sector-specific rules.</p><p><b>Public and neighbouring areas:</b> position cameras carefully, minimise unnecessary capture and provide clear signage and privacy information.</p><p><b>Biometric or AI features:</b> obtain specialist advice before using face recognition or other biometric processing.</p></div></div></section> }

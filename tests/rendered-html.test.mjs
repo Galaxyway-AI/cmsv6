@@ -56,6 +56,29 @@ test("publishes the featured compatible equipment catalogue", async () => {
   assert.doesNotMatch(html, /info@icustodian\.com/);
 });
 
+test("publishes the complete updated legal documents", async () => {
+  const termsResponse = await render("/terms");
+  assert.equal(termsResponse.status, 200);
+  const terms = await termsResponse.text();
+  assert.match(terms, /Last updated: 2 August 2026/);
+  assert.match(terms, /Consumer Cancellation Rights/);
+  assert.match(terms, /£60 per Device/);
+  assert.match(terms, /49\. Contact Details/);
+  assert.match(terms, /registered with the Information Commissioner’s Office/);
+  assert.doesNotMatch(terms, /Review required before publication|structured placeholder/);
+
+  const privacyResponse = await render("/privacy");
+  assert.equal(privacyResponse.status, 200);
+  const privacy = await privacyResponse.text();
+  assert.match(privacy, /Last updated: 2 August 2026/);
+  assert.match(privacy, /Our Data-Protection Roles/);
+  assert.match(privacy, /We Do Not Sell Personal Information/);
+  assert.match(privacy, /Requests About Customer Footage/);
+  assert.match(privacy, /30\. Contact Us/);
+  assert.match(privacy, /support@cmsv6\.co\.uk/);
+  assert.doesNotMatch(privacy, /Review required before publication|structured placeholder/);
+});
+
 test("rejects incomplete enquiry submissions before delivery", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-enquiry`);
