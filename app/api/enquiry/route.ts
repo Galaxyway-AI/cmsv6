@@ -5,7 +5,12 @@ const deliveryEndpoint = "https://forms.cmsv6.co.uk/submit";
 const allowedOrigins = new Set(["https://cmsv6.co.uk", "https://www.cmsv6.co.uk", "https://cmsv6-uk.frankywright.chatgpt.site"]);
 
 export async function POST(request: Request) {
-  const form = await request.formData();
+  let form: FormData;
+  try {
+    form = await request.formData();
+  } catch {
+    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+  }
   const name = String(form.get("name") || "").trim();
   const email = String(form.get("email") || "").trim();
   const phone = String(form.get("phone") || "").trim();

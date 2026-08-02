@@ -177,3 +177,15 @@ test("rejects incomplete enquiry submissions before delivery", async () => {
   assert.equal(response.status, 400);
   assert.match(await response.text(), /check the required fields/i);
 });
+
+test("rejects malformed enquiry content without a server error", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-malformed-enquiry`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(new Request("http://localhost/api/enquiry", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: "{}",
+  }), { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } }, { waitUntil() {}, passThroughOnException() {} });
+  assert.equal(response.status, 400);
+});
