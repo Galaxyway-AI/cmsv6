@@ -20,6 +20,7 @@ test("server-renders the CMSV6 acquisition homepage", async () => {
   assert.match(html, /Live video \+ GPS/);
   assert.match(html, /cmsv6-logo-1\.png/);
   assert.match(html, /cmsv6-logo\.png/);
+  assert.doesNotMatch(html, /_vinext\/image\?url=%2Fcmsv6-logo/);
   assert.match(html, /two months of CMSV6 hosting free/i);
   assert.match(html, /Vehicles &amp; fleets/);
   assert.match(html, /Farms &amp; rural/);
