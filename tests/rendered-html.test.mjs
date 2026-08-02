@@ -43,10 +43,14 @@ test("publishes the featured compatible equipment catalogue", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /iCustodian® iC9800MDVR-AI/);
-  assert.match(html, /£249\.00/);
+  assert.doesNotMatch(html, /£249\.00/);
+  assert.ok((html.match(/Price &amp; availability/g) ?? []).length >= 3);
+  assert.ok((html.match(/See iCustodian/g) ?? []).length >= 3);
   assert.match(html, /iC9000MDVR-AI\.png/);
   assert.match(html, /iC9800MDVR-K\.png/);
   assert.match(html, /N9\.png/);
   assert.match(html, /Browse all compatible DVRs/);
   assert.match(html, /icustodian\.com\/product\/n9dashcam/);
+  assert.match(html, /support@cmsv6\.co\.uk/);
+  assert.doesNotMatch(html, /info@icustodian\.com/);
 });

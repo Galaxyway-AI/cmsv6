@@ -45,7 +45,7 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
     <div><label htmlFor="message">Tell us about your setup</label><textarea id="message" name="message" rows={compact ? 3 : 5} required placeholder="Where will it be used, what equipment do you have, and what do you need to monitor?" /></div>
     <label className="check"><input type="checkbox" name="consent" required /> <span>I agree that iCustodian may use these details to respond to my enquiry.</span></label>
     <button className="button primary" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send enquiry"}</button>
-    <div className="form-status" aria-live="polite">{state === "manual" ? "Your details passed validation. Online delivery is awaiting setup, so please email info@icustodian.com to send your enquiry today." : state === "error" ? "We could not process that yet. Please email info@icustodian.com." : ""}</div>
+    <div className="form-status" aria-live="polite">{state === "manual" ? "Your details passed validation. Online delivery is awaiting setup, so please email support@cmsv6.co.uk to send your enquiry today." : state === "error" ? "We could not process that yet. Please email support@cmsv6.co.uk." : ""}</div>
   </form>;
 }
 

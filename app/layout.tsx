@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const organisationSchema = { "@context":"https://schema.org", "@type":"Organization", name:"iCustodian Limited", url:"https://cmsv6.co.uk", logo:"https://cmsv6.co.uk/cmsv6-logo.png", email:"info@icustodian.com", telephone:"+44 7543 02 5555", address:{"@type":"PostalAddress", addressLocality:"Erith", addressRegion:"Greater London", addressCountry:"GB"} };
+const organisationSchema = { "@context":"https://schema.org", "@type":"Organization", name:"iCustodian Limited", url:"https://cmsv6.co.uk", logo:"https://cmsv6.co.uk/cmsv6-logo.png", email:"support@cmsv6.co.uk", telephone:"+44 7543 02 5555", address:{"@type":"PostalAddress", addressLocality:"Erith", addressRegion:"Greater London", addressCountry:"GB"} };
 const serviceSchema = { "@context":"https://schema.org", "@type":"Service", name:"iCustodian CMSV6 hosting", serviceType:"Remote CCTV, live-video and GPS monitoring platform", provider:{"@type":"Organization",name:"iCustodian Limited"}, areaServed:{"@type":"Country",name:"United Kingdom"}, offers:{"@type":"AggregateOffer",lowPrice:"60",highPrice:"180",priceCurrency:"GBP"} };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
