@@ -4,6 +4,7 @@ export const navigation = [
   ["How it works", "/how-it-works"],
   ["Equipment", "/equipment"],
   ["Pricing", "/pricing"],
+  ["Resources", "/resources"],
   ["Support", "/support"],
 ] as const;
 
@@ -24,9 +25,9 @@ export const industries = [
 ] as const;
 
 export const plans = [
-  { months: "6 months", price: 60, note: "A flexible shorter term", cta: "Choose 6 months" },
+  { months: "6 months", price: 60, note: "A flexible shorter term", cta: "Choose 6 months", popular: false },
   { months: "12 months", price: 100, note: "Our popular annual option", cta: "Choose 12 months", popular: true },
-  { months: "24 months", price: 180, note: "Best standard-plan value", cta: "Choose 24 months" },
+  { months: "24 months", price: 180, note: "Best standard-plan value", cta: "Choose 24 months", popular: false },
 ] as const;
 
 export const steps = [
@@ -75,5 +76,9 @@ export const pageMeta: Record<string, { title: string; description: string }> = 
   resources: { title: "CMSV6 Guides & Resources", description: "Practical guides to remote CCTV, GPS monitoring, compatible DVRs and responsible system use." },
   privacy: { title: "CMSV6 Privacy Policy | iCustodian", description: "How iCustodian Limited collects, uses, shares and protects personal information in connection with CMSV6." },
   terms: { title: "Terms of Use and CMSV6 Service Terms", description: "Terms governing the CMSV6 website, customer accounts, subscriptions, monitoring functions and related services." },
+  "cmsv6-device-compatibility": { title: "CMSV6 Device Compatibility Checker | Manual DVR Review", description: "Send your DVR model, firmware, channel, connection, GPS, audio and playback requirements for a manual CMSV6 compatibility check." },
+  "international-cmsv6-hosting": { title: "International CMSV6 Hosting | UK-Hosted Remote CCTV", description: "Request UK-hosted CMSV6 service for compatible equipment outside the UK, subject to connectivity, local law and confirmed support arrangements." },
+  "editorial-policy": { title: "CMSV6 Editorial Policy | Technical Review & Corrections", description: "How CMSV6 technical information is reviewed, updated, corrected and disclosed by iCustodian Limited." },
+  sitemap: { title: "CMSV6 Website Sitemap | Services, Solutions & Guides", description: "Browse CMSV6 service pages, industry solutions, compatible equipment, practical guides, support and legal information." },
   "responsible-use": { title: "Responsible CCTV Use | CMSV6", description: "Guidance for lawful, fair and proportionate use of video, audio and GPS monitoring." },
 };

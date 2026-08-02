@@ -1,0 +1,6 @@
+Old URL,New URL,Reason,Redirect type,Internal links updated,Sitemap updated,Tested
+http://cmsv6.co.uk/*,https://cmsv6.co.uk/*,Enforce HTTPS canonical host,308,N/A,N/A,Worker rule implemented
+http://www.cmsv6.co.uk/*,https://cmsv6.co.uk/*,Remove protocol and host duplication,308,N/A,N/A,Worker route implemented
+https://www.cmsv6.co.uk/*,https://cmsv6.co.uk/*,Consolidate to apex canonical host,308,N/A,N/A,Worker route implemented
+, ,No legacy content paths were identified for migration; unknown routes retain genuine 404 responses,N/A,Yes,Yes,Local 404 test passed
+

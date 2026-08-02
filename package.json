@@ -14,7 +14,8 @@
     "db:generate": "drizzle-kit generate",
     "worker:types": "wrangler types workers/enquiry/worker-configuration.d.ts --config workers/enquiry/wrangler.jsonc",
     "worker:check": "tsc --noEmit -p workers/enquiry/tsconfig.json",
-    "worker:deploy": "wrangler deploy --config workers/enquiry/wrangler.jsonc"
+    "worker:deploy": "wrangler deploy --config workers/enquiry/wrangler.jsonc",
+    "indexnow": "node scripts/submit-indexnow.mjs"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",
