@@ -16,3 +16,17 @@
 /* Supplied CMSV6 brand assets */
 .logo{height:100%;align-items:center}.logo-wide{position:relative;display:block;width:178px;height:66px;overflow:hidden}.logo-wide img{position:absolute;left:0;top:-26px;width:178px;height:auto;max-width:none}.logo-square{display:none;width:50px;height:50px;object-fit:contain}.footer .logo{height:auto}.footer .logo-wide{width:220px;height:78px}.footer .logo-wide img{top:-34px;width:220px}.branded-dash{display:flex;align-items:center}.branded-dash>img{width:34px;height:34px;object-fit:contain}.branded-dash i{margin-left:6px}
 @media(max-width:620px){.site-header .logo-wide{display:none}.site-header .logo-square{display:block;width:49px;height:49px}.footer .logo-wide{display:block}.footer .logo-square{display:none}}
+
+/* Contained advanced-safety radar */
+.radar-card{grid-template-columns:minmax(220px,280px) 1fr;gap:34px;padding:38px}
+.radar{isolation:isolate;justify-self:center;width:min(100%,280px);overflow:hidden;border:1px solid rgba(58,204,240,.48);background:radial-gradient(circle at center,rgba(16,65,91,.92) 0 14%,transparent 14.5%),repeating-radial-gradient(circle at center,transparent 0 24%,rgba(61,202,236,.2) 24.5% 25.5%,transparent 26% 49%);box-shadow:inset 0 0 45px rgba(3,14,27,.5),0 0 0 1px rgba(8,117,225,.16)}
+.radar:before{content:"";position:absolute;inset:0;z-index:1;border-radius:50%;background:linear-gradient(90deg,transparent calc(50% - .5px),rgba(76,202,232,.2) 50%,transparent calc(50% + .5px)),linear-gradient(transparent calc(50% - .5px),rgba(76,202,232,.2) 50%,transparent calc(50% + .5px));pointer-events:none}
+.radar:after{content:"";position:absolute;inset:-1px;z-index:2;border-radius:50%;background:conic-gradient(from -28deg,transparent 0 292deg,rgba(39,193,230,.04) 310deg,rgba(48,207,239,.42) 352deg,rgba(106,229,250,.58) 360deg);transform-origin:50% 50%;animation:radarSweep 5s linear infinite;pointer-events:none}
+.radar i{z-index:3;width:8px;height:8px;animation:radarPing 2.4s ease-in-out infinite}
+.radar i:nth-child(1){left:29%;top:38%;animation-delay:-.8s}.radar i:nth-child(2){left:70%;top:63%;animation-delay:-1.6s}.radar i:nth-child(3){left:56%;top:24%}
+.radar span{left:50%;top:50%;z-index:4;display:grid;width:60px;height:60px;place-items:center;border:1px solid rgba(72,207,238,.33);border-radius:50%;background:#0b2138;box-shadow:0 0 24px rgba(0,0,0,.34);transform:translate(-50%,-50%);font-size:.92rem;letter-spacing:.06em}
+.signal-list{gap:12px;margin-left:0}.signal-list span{padding:10px 12px;border-left:2px solid rgba(69,200,232,.25);border-radius:0 7px 7px 0;background:rgba(255,255,255,.025)}
+@keyframes radarSweep{to{transform:rotate(360deg)}}
+@keyframes radarPing{0%,100%{box-shadow:0 0 0 0 rgba(93,224,247,.15),0 0 12px #5de0f7;opacity:.74}50%{box-shadow:0 0 0 7px rgba(93,224,247,0),0 0 16px #5de0f7;opacity:1}}
+@media(max-width:860px){.radar-card{grid-template-columns:1fr;max-width:540px;margin-inline:auto;padding:32px}.radar{width:min(100%,270px)}.signal-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0;text-align:center}.signal-list span{padding:10px 7px;border:1px solid rgba(69,200,232,.17);border-radius:8px}}
+@media(max-width:430px){.radar-card{padding:24px 18px}.radar{width:min(100%,245px)}.signal-list{grid-template-columns:1fr;text-align:left}.signal-list span{padding:9px 12px}}
