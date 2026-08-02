@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
+import Image from "next/image";
 import { navigation, plans } from "./site-data";
 import { MobileMenu } from "./interactive";
 
-export function Logo() { return <a href="/" className="logo" aria-label="CMSV6 home"><span className="logo-mark">C6</span><span><b>CMSV6</b><small>by iCustodian®</small></span></a>; }
+export function Logo() { return <a href="/" className="logo" aria-label="CMSV6 home"><span className="logo-wide"><Image src="/cmsv6-logo-1.png" alt="CMSV6 CCTV Live Video and GPS Streaming" width={1080} height={720} priority/></span><Image className="logo-square" src="/cmsv6-logo.png" alt="CMSV6" width={600} height={600} priority/></a>; }
 
 export function Header() {
   return <><div className="offer-bar"><span>Compatible iCustodian® DVR purchase?</span> Get two months of CMSV6 hosting free. <a href="/pricing#free-offer">See offer</a></div><header className="site-header"><div className="container nav-row"><Logo/><nav className="desktop-nav" aria-label="Primary navigation">{navigation.map(([label, href]) => <a key={href} href={href}>{label}</a>)}</nav><div className="header-actions"><a className="login-link" href="/support#login">Customer login</a><a className="button primary small-button" href="/contact?enquiry=activation">Get CMSV6</a></div><MobileMenu/></div></header></>;

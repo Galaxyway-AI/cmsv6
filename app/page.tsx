@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import type { Metadata } from "next";
+import Image from "next/image";
 import { CTA, Disclaimer, PricingCards, SectionHeading } from "./components";
 import { EnquiryForm } from "./interactive";
 import { features, industries, steps } from "./site-data";
@@ -36,7 +37,7 @@ export default function Home() {
 function DashboardVisual() {
   return <div className="dashboard-wrap cctv-console" aria-label="Animated illustrative CCTV live monitoring for a home, business and vehicle">
     <span className="illustrative">Illustrative live monitoring view</span>
-    <div className="dash-top"><span className="dash-brand">CMSV6 <i>LIVE</i></span><span><b className="online-dot"/> Live capture active</span></div>
+    <div className="dash-top"><span className="dash-brand branded-dash"><Image src="/cmsv6-logo.png" alt="CMSV6" width={600} height={600}/><i>LIVE</i></span><span><b className="online-dot"/> Live capture active</span></div>
     <div className="cctv-wall">
       <div className="live-feed feed-business feed-primary"><div className="camera-chrome"><span>BUSINESS · WAREHOUSE 01</span><b><i/> LIVE</b></div><div className="scan-line"/><div className="capture-caption"><small>REMOTE VIEW</small><strong>Business premises</strong><span>Multi-camera coverage</span></div></div>
       <div className="live-feed feed-home"><div className="camera-chrome"><span>HOME · EXTERIOR 02</span><b><i/> LIVE</b></div><div className="scan-line"/><div className="capture-caption"><strong>Home</strong><span>Remote property view</span></div></div>
